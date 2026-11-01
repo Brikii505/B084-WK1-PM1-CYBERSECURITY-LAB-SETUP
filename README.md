@@ -3,69 +3,163 @@ Cybersecurity Lab setup
 
 ## 1. Project Overview
 
-This project involved setting up a virtual cybersecurity lab environment using Oracle VirtualBox and Kali Linux, following the WK1-PM1 requirements provided by Networkwalks Academy.
+This project involved building a virtual cybersecurity lab environment using Oracle VirtualBox and Kali Linux, following the WK1-PM1 requirements provided by Networkwalks Academy.
 
-The purpose of the lab is to establish a controlled virtual environment for future cybersecurity, ethical hacking, networking, and CTF practical exercises.
+The purpose of this project is to establish a controlled virtual environment for learning cybersecurity, ethical hacking, network configuration, and Capture The Flag (CTF) practical exercises.
 
-## 2. Tools Used
+## 2. Project Objectives
 
-- Oracle VirtualBox – virtualization platform.
-- 7-Zip – archive extraction utility.
-- Kali Linux 2026.1 – cybersecurity testing machine.
+The main objectives of this project were:
 
-## 3. VirtualBox Network Configuration
+- Install and configure Oracle VirtualBox.
+- Download and import Kali Linux as a virtual machine.
+- Create a custom NAT Network using the required subnet.
+- Configure Kali Linux with the required static IP address.
+- Enable bidirectional clipboard and drag-and-drop functionality.
+- Configure shared folders between the host and virtual machine.
+- Verify internet connectivity.
+- Create a snapshot of the configured Kali Linux virtual machine.
 
-A custom NAT Network was created and configured according to the assignment requirements.
+## 3. Tools and Technologies
+
+| Tool | Purpose |
+|---|---|
+| Oracle VirtualBox | Virtualization platform |
+| 7-Zip | Archive extraction |
+| Kali Linux 2026.1 | Cybersecurity testing machine |
+| NAT Network | Virtual network configuration |
+
+## 4. Lab Architecture and Network Configuration
+
+A custom NAT Network named `NatNetwork` was created in VirtualBox.
+
+The network was configured according to the assignment requirements.
 
 | Setting | Configuration |
 |---|---|
 | Network Name | NatNetwork |
 | Network Type | NAT Network |
-| IPv4 Network | 10.0.0.0/24 |
-| Network Range | 10.0.0.2–10.0.0.99 |
-
-## 4. Kali Linux Configuration
-
-Kali Linux was successfully imported into VirtualBox and configured as the main virtual machine for cybersecurity exercises.
-
-| Setting | Configuration |
-|---|---|
-| Operating System | Kali Linux 2026.1 |
-| Network Adapter | NAT Network |
-| Network Interface | eth0 |
-| IPv4 Address | 10.0.0.2/24 |
+| IPv4 Prefix | 10.0.0.0/24 |
+| DHCP Server | Enabled |
+| Kali Linux IP | 10.0.0.2/24 |
 | Default Gateway | 10.0.0.1 |
+| Network Interface | eth0 |
 
-## 5. VirtualBox Integration Settings
+### NAT Network Configuration
 
-The required integration features were configured:
+The VirtualBox NAT Network was successfully configured using the required IPv4 subnet.
+
+![NAT Network Configuration](01-nat-network.png)
+
+## 5. Kali Linux Virtual Machine Configuration
+
+Kali Linux 2026.1 was successfully downloaded, imported, and configured in Oracle VirtualBox.
+
+The virtual machine was connected to the custom NAT Network and assigned the required IP address.
+
+![Kali Linux IP Configuration](04-kali-ip-configuration.png)
+
+## 6. VirtualBox Integration Settings
+
+The required VirtualBox integration features were enabled:
 
 - Shared Clipboard: Bidirectional.
 - Drag and Drop: Bidirectional.
 - Shared Folders: Enabled.
-- Host shared folder: `/downloads`.
+- Host Downloads folder shared with the virtual machine.
 
-These features allow communication and file sharing between the host operating system and the Kali Linux virtual machine.
+These settings allow easier interaction and file sharing between the host operating system and Kali Linux.
 
-## 6. Internet Connectivity
+### Clipboard and Drag-and-Drop Configuration
 
-Internet connectivity was configured and successfully tested from Kali Linux.
+![Clipboard and Drag and Drop](02-clipboard-drag-drop.png)
+
+### Shared Folder Configuration
+
+![Shared Folder Configuration](03-shared-folder.png)
+
+## 7. Internet Connectivity and Testing
+
+Internet connectivity was successfully configured and tested from Kali Linux.
+
+The following commands were used to verify network connectivity and DNS resolution:
+
+**Gateway connectivity:**
+
+```bash
+ping -c 3 10.0.0.1
+```
+
+**External IP connectivity:**
+
+```bash
+ping -c 3 8.8.8.8
+```
+
+**DNS resolution and connectivity:**
+
+```bash
+ping -c 3 google.com
+```
+
+All three tests were successful, confirming connectivity to the gateway, external network, and DNS resolution.
+
+![Internet Connectivity Tests](05-internet-connectivity.png)
+
+## 8. Troubleshooting
+
+During the configuration process, a network connectivity issue was encountered.
+
+The network connection was restarted using NetworkManager commands, and the IP configuration was checked again.
 
 The following commands were used:
 
 ```bash
-ping -c 4 1.1.1.1
-ping -c 4 google.com
+sudo nmcli connection down "Wired connection 1"
+sudo nmcli connection up "Wired connection 1"
 ```
 
-Both tests confirmed successful network connectivity and DNS resolution.
+After the connection was restored, network connectivity was successfully verified using ping tests.
 
-## 7. Conclusion
+## 9. Virtual Machine Snapshot
 
-The WK1-PM1 lab setup was successfully completed according to the assignment requirements.
+After completing the Kali Linux configuration, a snapshot was created in VirtualBox.
 
-Oracle VirtualBox, the custom NAT Network, and Kali Linux were configured. Network connectivity, shared folders, clipboard integration, and drag-and-drop functionality were verified.
+The snapshot was named:
 
-The virtual environment is now ready for future cybersecurity learning, ethical hacking practices.
+`Kali configured - 10.0.0.2`
+
+This provides a restore point for the configured virtual machine and supports future practical exercises.
+
+![Kali Linux Snapshot](06-kali-snapshot.png)
+
+## 10. Lessons Learned
+
+Through this project, I gained practical experience with:
+
+- Virtual machine installation and configuration.
+- Virtual networking and NAT Networks.
+- IPv4 addressing and network interfaces.
+- Linux network configuration using NetworkManager.
+- Internet connectivity and DNS testing.
+- Shared folders and VirtualBox integration features.
+- Troubleshooting basic virtual network connectivity issues.
+- Creating and managing virtual machine snapshots.
+
+## 11. Conclusion
+
+The WK1-PM1 Cybersecurity Lab Setup was successfully completed according to the assignment requirements.
+
+Oracle VirtualBox and Kali Linux were installed and configured, the required NAT Network and IP address were established, and the integration features and shared folder were enabled.
+
+Internet connectivity was tested successfully, and a snapshot of the configured Kali Linux virtual machine was created.
+
+The virtual lab environment is now ready for future cybersecurity learning, ethical hacking practice, and CTF challenges.
 
 ---
+
+**Project:** B084-WK1-PM1 – Cybersecurity Lab Setup  
+**Training Provider:** Networkwalks Academy  
+**Virtualization Platform:** Oracle VirtualBox  
+**Operating System:** Kali Linux 2026.1  
+**Status:** Completed
